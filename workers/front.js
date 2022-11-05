@@ -88,7 +88,10 @@ async function handleRequest(request) {
       }
     )
   }
-
+	
+  if (pathname === '/sitemap.xml') {
+    return fetch(`https://blog-bga.pages.dev${pathname}`);
+  }
 
   return fetch('https://blog-front-5z7.pages.dev' + pathname);
 }
