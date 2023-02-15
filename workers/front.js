@@ -8,11 +8,12 @@ export default {
 
 const blogBaseUrl = 'https://obake.land'
 const assetBaseUrl = 'https://blog-bga.pages.dev'
+const ogpBaseUrl = 'https://ogp.obake.land/api/blog/og?title='
 
 async function createOgpOnlyResponse (pathname) {
   let title = 'ブログ'
   let description = '日報とか学んだこととかメモするブログ'
-  let ogpUrl = `https://ogp.obake.land/api/og?title=ぴのプログラミング日記`
+  let ogpUrl = `${ogpBaseUrl}ぴのプログラミング日記`
   const requestUrl = blogBaseUrl + pathname
 
   // ブログページ向け
@@ -22,7 +23,7 @@ async function createOgpOnlyResponse (pathname) {
     const data = await res.json()
     title = data.metaData.title
     description = data.metaData.description
-    ogpUrl = `https://ogp.obake.land/api/og?title=${title}`
+    ogpUrl = `${ogpBaseUrl}${title}`
   }
 
   // タグページ向け
@@ -30,7 +31,7 @@ async function createOgpOnlyResponse (pathname) {
     const tagName = pathname.replace('/tags/', '')
     title = `${tagName} の記事一覧`
     description = `${tagName} のタグがついた記事一覧`
-    ogpUrl = `https://ogp.obake.land/api/og?title=${title}`
+    ogpUrl = `${ogpBaseUrl}${title}`
   }
 
   return `
